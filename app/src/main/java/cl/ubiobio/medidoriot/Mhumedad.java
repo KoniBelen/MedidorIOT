@@ -69,19 +69,34 @@ public class Mhumedad extends AppCompatActivity {
     }
     public void servicioWeb() {
         //buscamos la fecha actual
-        /*Calendar rightNow = Calendar.getInstance();
+        Calendar rightNow = Calendar.getInstance();
         Date fechaActual = rightNow.getTime();
-        Integer dia = fechaActual.getDay();
-        Integer mes = fechaActual.getMonth();
-        Integer anio = fechaActual.getYear();
+        int dia = fechaActual.getDate();
+        int mes = fechaActual.getMonth()+1;
+        int anio = fechaActual.getYear()-100;
         String fechaConcatenada = "";
-        fechaConcatenada+= dia;
-        fechaConcatenada+= mes;
-        fechaConcatenada+=  anio;
-        System.out.println(fechaConcatenada);*/
+        if (dia<10){
+            String diaa = "0"+Integer.toString(dia);
+            if (mes<10){
+                String mess="0"+Integer.toString(mes);
+                fechaConcatenada=""+diaa;
+                fechaConcatenada=fechaConcatenada+mess;
+                fechaConcatenada=fechaConcatenada+"20"+Integer.toString(anio);
+                System.out.println("*******************************************************");
+                System.out.println("*******************************************************");
+                System.out.println("*******************************************************");
+                System.out.println("dia: "+diaa);
+                System.out.println("mes: "+mess);
+                System.out.println("anio: "+Integer.toString(anio));
+                System.out.println("fecha concatenada: "+fechaConcatenada);
+                System.out.println("*******************************************************");
+                System.out.println("*******************************************************");
+                System.out.println("*******************************************************");
+            }
+        }
         //url de consulta
         //String WS_URL = "http://arrau.chillan.ubiobio.cl:8075/ubbiot/web/mediciones/medicionespordia/lWTXt6CeLP/8IvrZCP3qa/01052019";
-        String WS_URL = "http://arrau.chillan.ubiobio.cl:8075/ubbiot/web/mediciones/medicionespordia/KIl6Exp5mB/E1yGxKAcrg/22042018";
+        String WS_URL = "http://arrau.chillan.ubiobio.cl:8075/ubbiot/web/mediciones/medicionespordia/KIl6Exp5mB/E1yGxKAcrg/"+fechaConcatenada;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, WS_URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
